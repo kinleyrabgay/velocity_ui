@@ -18,11 +18,12 @@ class M2 extends StatelessWidget {
             const CalendarView().p24().h(context.percentHeight * 40),
 
             // Music PlayerView
-            const MusicPlayerView().px24()
+            const MusicPlayerView().px24(),
 
             // ChatView
+            const ChatView().p24()
           ],
-        ),
+        ).scrollVertical(),
       ),
 
       // BottomNavgiation
@@ -162,9 +163,99 @@ class MusicPlayerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedBox(
-      child: Row(
-        children: [],
+      child: Column(
+        children: [
+          VxCapsule(
+            backgroundColor: Vx.hexToColor("#c4ecd4"),
+            width: 135,
+            height: 26,
+            child: [
+              const Icon(Icons.phone_android).scale50(),
+              const Text("Phone Speaker").text.make()
+            ].hStack(),
+          ).objectCenterRight(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VxBox()
+                  .square(90)
+                  .bgImage(const DecorationImage(
+                    image: NetworkImage('https://picsum.photos/500'),
+                    fit: BoxFit.cover,
+                  ))
+                  .rounded
+                  .make(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Song name right here").text.semiBold.make(),
+                  const Text("artist name right here").text.sm.make()
+                ],
+              ).pSymmetric(h: 16, v: 12)
+            ],
+          ),
+          Slider(
+            value: 35,
+            inactiveColor: Vx.black,
+            activeColor: Vx.black,
+            min: 0,
+            max: 100,
+            onChanged: (value) {},
+          ),
+          HStack([
+            const Text('1:20').text.make(),
+            const Spacer(),
+            const Text('3:20').text.make()
+          ]).px24(),
+          const HStack([
+            Icon(
+              Icons.shuffle,
+              size: 24,
+            ),
+            Spacer(),
+            Icon(
+              Icons.skip_previous,
+              size: 24,
+            ),
+            Spacer(),
+            Icon(
+              Icons.play_arrow,
+              size: 24,
+            ),
+            Spacer(),
+            Icon(
+              Icons.skip_next,
+              size: 24,
+            ),
+            Spacer(),
+            Icon(
+              Icons.repeat,
+              size: 24,
+            ),
+          ]).p16()
+        ],
       ),
+    ).wFull(context);
+  }
+}
+
+class ChatView extends StatelessWidget {
+  const ChatView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        "https://shorturl.at/ckRY9".circularNetworkImage(radius: 32),
+        10.widthBox,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("VelocityX").text.bold.make(),
+            const Text("Check this out!").text.caption(context).make()
+          ],
+        ).box.p16.roundedLg.color(Vx.hexToColor("#fff6db")).make()
+      ],
     );
   }
 }
